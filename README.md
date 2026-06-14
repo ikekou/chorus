@@ -64,8 +64,10 @@ Flow: send from the popup → `background.js` opens the windows → it waits for
 3. Click **Load unpacked** and select this folder
 4. Use it from the icon that appears in the toolbar
 
-> Icons are bundled in `icons/` (16/32/48/128px); the source is `icons/icon.svg`.
-> To replace them, edit the SVG and export each size with `qlmanage` (SVG→PNG) + `sips` (resize).
+> Icons are bundled in `icons/`. Two variants: a plated version (`icon-*.png`, for the store
+> and the extensions page) and a transparent toolbar version (`icon-tb-*.png`).
+> They are generated with transparency by `python3 scripts/render-icons.py` (requires Pillow).
+> Edit the shapes/colors in that script and re-run to regenerate.
 
 ## Notes / known limitations
 
