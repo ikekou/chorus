@@ -1,4 +1,6 @@
-# Multi LLM Chat (Chrome 拡張)
+# Chorus (Chrome 拡張)
+
+> 複数の AI に一斉に問いかけ、声を揃えて答えてもらう。
 
 1 つの入力欄からプロンプトを書いて確定すると、**ChatGPT / Claude / Gemini** のウィンドウを並べて開き、それぞれに同じプロンプトを自動送信する Chrome 拡張機能(Manifest V3)です。
 

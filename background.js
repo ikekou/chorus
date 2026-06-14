@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         sendResponse({ ok: true });
       }
     } catch (err) {
-      console.warn("[MultiLLMChat] 処理に失敗しました", err);
+      console.warn("[Chorus] 処理に失敗しました", err);
       sendResponse({ ok: false });
     }
   })();
@@ -141,7 +141,7 @@ function injectInto(tabId, provider, prompt) {
       args: [provider, prompt],
     })
     .catch((err) =>
-      console.warn(`[MultiLLMChat] ${provider.name} への注入に失敗`, err)
+      console.warn(`[Chorus] ${provider.name} への注入に失敗`, err)
     );
 }
 

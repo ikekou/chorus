@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Multi LLM Chat",
+  "name": "Chorus",
   "version": "0.1.0",
-  "description": "1つの入力欄から ChatGPT / Claude / Gemini に同じプロンプトをまとめて送信します。",
+  "description": "1つの入力欄から ChatGPT / Claude / Gemini に同じプロンプトをまとめて送信します。複数のAIに一斉に問いかけ、声を揃えて答えてもらう。",
   "permissions": [
     "tabs",
     "scripting",
@@ -16,7 +16,7 @@
     "https://gemini.google.com/*"
   ],
   "action": {
-    "default_title": "Multi LLM Chat",
+    "default_title": "Chorus",
     "default_popup": "popup.html"
   },
   "background": {

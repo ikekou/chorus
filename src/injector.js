@@ -6,7 +6,7 @@
 // 引数の config / prompt は JSON シリアライズ可能な値のみ。
 export function injectPrompt(config, prompt) {
   const FIND_DEADLINE = Date.now() + 20000; // 入力欄が現れるまで最大20秒待つ
-  const tag = "[MultiLLMChat]";
+  const tag = "[Chorus]";
 
   // セレクタ配列を上から試して最初に見つかった要素を返す。
   const pick = (selectors) => {
