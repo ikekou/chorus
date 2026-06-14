@@ -25,13 +25,13 @@ Chorus(以下「本拡張」)は、ユーザーのプライバシーを最優先
 
 - **対象サイトへのアクセス(host permissions: chatgpt.com / claude.ai / gemini.google.com)**: プロンプトの差し込みと送信のため
 - **scripting**: 上記サイトのページ内に入力・送信処理を注入するため
-- **tabs**: 開いたタブの読み込み完了の検知と、セットに属するウィンドウの管理のため
 - **storage**: 上記「ローカルに保存する情報」のため
 - **system.display**: 開いたウィンドウを画面に並べて配置するための画面サイズ取得のため
 
 ### お問い合わせ
 
-ご質問は https://github.com/ikekou/chorus/issues までご連絡ください。
+ご質問・不具合の報告は GitHub の Issues へお願いします:
+https://github.com/ikekou/chorus/issues
 
 ---
 
@@ -58,10 +58,10 @@ The Extension inserts your typed prompt into the input box of the AI chat servic
 
 - **Host permissions (chatgpt.com / claude.ai / gemini.google.com)**: to insert and send prompts
 - **scripting**: to inject the input/send logic into those pages
-- **tabs**: to detect when an opened tab finishes loading and to manage the windows belonging to a set
 - **storage**: for the locally stored information described above
 - **system.display**: to read the screen size so opened windows can be tiled side by side
 
 ### Contact
 
-For questions, contact https://github.com/ikekou/chorus/issues.
+For questions or bug reports, please open a GitHub issue:
+https://github.com/ikekou/chorus/issues
