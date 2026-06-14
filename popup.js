@@ -1,4 +1,4 @@
-import { PROVIDER_LIST, PROVIDERS } from "./src/providers.js";
+import { PROVIDER_LIST } from "./src/providers.js";
 
 const STORAGE_KEY = "mlc_state";
 
@@ -49,10 +49,9 @@ function colorFor(index) {
   return SET_COLORS[index % SET_COLORS.length];
 }
 
-// セットのラベル表示。番号と、稼働中モデルの内訳を添える。
+// セットのラベル表示。番号 + 内容(最初のプロンプト冒頭)。
 function displayLabel(set, index) {
-  const names = set.providers.map((id) => PROVIDERS[id]?.name ?? id).join("・");
-  return { number: `${index + 1}`, text: set.label || "(無題)", meta: names };
+  return { number: `${index + 1}`, text: set.label || "(無題)" };
 }
 
 function renderTargets(selectedTarget) {
@@ -64,14 +63,13 @@ function renderTargets(selectedTarget) {
   );
 
   sets.forEach((set, index) => {
-    const { number, text, meta } = displayLabel(set, index);
+    const { number, text } = displayLabel(set, index);
     targetsEl.appendChild(
       targetRow({
         value: set.id,
         setId: set.id,
         dot: colorFor(index),
         text: `${number}. ${text}`,
-        meta,
       })
     );
   });
@@ -96,7 +94,7 @@ function renderTargets(selectedTarget) {
   if (input) input.checked = true;
 }
 
-function targetRow({ value, dot, icon, text, meta, setId }) {
+function targetRow({ value, dot, icon, text, setId }) {
   const label = document.createElement("label");
   label.className = "target";
 
@@ -116,12 +114,6 @@ function targetRow({ value, dot, icon, text, meta, setId }) {
   textEl.textContent = icon ? `${icon} ${text}` : text;
 
   label.append(input, dotEl, textEl);
-  if (meta) {
-    const metaEl = document.createElement("span");
-    metaEl.className = "meta";
-    metaEl.textContent = meta;
-    label.appendChild(metaEl);
-  }
 
   // 既存セットには「前面に出す」「閉じる」ボタンを付ける。
   if (setId) {
