@@ -76,6 +76,19 @@ function renderTargets(selectedTarget) {
     );
   });
 
+  // セットが1つ以上あるときだけ「全部閉じる」ボタンを出す。
+  if (sets.length > 0) {
+    const closeAllEl = document.createElement("button");
+    closeAllEl.type = "button";
+    closeAllEl.className = "close-all";
+    closeAllEl.textContent = "すべてのセットを閉じる";
+    closeAllEl.addEventListener("click", async () => {
+      await chrome.runtime.sendMessage({ type: "MLC_CLOSE_ALL" });
+      await refreshSets("new");
+    });
+    targetsEl.appendChild(closeAllEl);
+  }
+
   // 選択を復元(対象が消えていたら新規へ)。
   const exists = selectedTarget === "new" || sets.some((s) => s.id === selectedTarget);
   const value = exists ? selectedTarget : sets.length ? sets[sets.length - 1].id : "new";
@@ -110,11 +123,11 @@ function targetRow({ value, dot, icon, text, meta, setId }) {
     label.appendChild(metaEl);
   }
 
-  // 既存セットには「前面に出す」ボタンを付ける。
+  // 既存セットには「前面に出す」「閉じる」ボタンを付ける。
   if (setId) {
     const raiseEl = document.createElement("button");
     raiseEl.type = "button";
-    raiseEl.className = "raise";
+    raiseEl.className = "btn";
     raiseEl.textContent = "⤴ 前面";
     raiseEl.title = "このセットの窓をまとめて前面に出す";
     raiseEl.addEventListener("click", (e) => {
@@ -124,7 +137,20 @@ function targetRow({ value, dot, icon, text, meta, setId }) {
       chrome.runtime.sendMessage({ type: "MLC_RAISE_SET", setId });
       window.close();
     });
-    label.appendChild(raiseEl);
+
+    const closeEl = document.createElement("button");
+    closeEl.type = "button";
+    closeEl.className = "btn close";
+    closeEl.textContent = "✕";
+    closeEl.title = "このセットの窓をまとめて閉じる";
+    closeEl.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      await chrome.runtime.sendMessage({ type: "MLC_CLOSE_SET", setId });
+      await refreshSets("new");
+    });
+
+    label.append(raiseEl, closeEl);
   }
   return label;
 }

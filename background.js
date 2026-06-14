@@ -27,6 +27,12 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       } else if (message?.type === "MLC_RAISE_SET") {
         await raiseSet(message.setId);
         sendResponse({ ok: true });
+      } else if (message?.type === "MLC_CLOSE_SET") {
+        await closeSet(message.setId);
+        sendResponse({ ok: true });
+      } else if (message?.type === "MLC_CLOSE_ALL") {
+        await closeAllSets();
+        sendResponse({ ok: true });
       }
     } catch (err) {
       console.warn("[Chorus] 処理に失敗しました", err);
@@ -171,6 +177,34 @@ async function raiseSet(setId) {
       await chrome.windows.update(tab.windowId, { focused: true });
     } catch {
       // 閉じられた窓はスキップ。
+    }
+  }
+}
+
+// セットの窓(=開いたタブ)をまとめて閉じ、記録からも削除する。
+// ユーザーが後から同じ窓に開いた別タブを巻き込まないよう、窓ごとではなく
+// このセットで開いたタブだけを閉じる。
+async function closeSet(setId) {
+  const sets = await getSets();
+  const set = sets.find((s) => s.id === setId);
+  if (!set) return;
+  await removeTabs(Object.values(set.tabs));
+  await saveSets(sets.filter((s) => s.id !== setId));
+}
+
+// すべてのセットの窓を閉じ、記録を空にする。
+async function closeAllSets() {
+  const sets = await getSets();
+  await removeTabs(sets.flatMap((s) => Object.values(s.tabs)));
+  await saveSets([]);
+}
+
+async function removeTabs(tabIds) {
+  for (const tabId of tabIds) {
+    try {
+      await chrome.tabs.remove(tabId);
+    } catch {
+      // すでに閉じられているタブはスキップ。
     }
   }
 }
