@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Multi LLM Chat",
+  "version": "0.1.0",
+  "description": "1つの入力欄から ChatGPT / Claude / Gemini に同じプロンプトをまとめて送信します。",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "storage",
+    "system.display"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*"
+  ],
+  "action": {
+    "default_title": "Multi LLM Chat",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}
