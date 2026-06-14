@@ -68,6 +68,7 @@ function renderTargets(selectedTarget) {
     targetsEl.appendChild(
       targetRow({
         value: set.id,
+        setId: set.id,
         dot: colorFor(index),
         text: `${number}. ${text}`,
         meta,
@@ -82,7 +83,7 @@ function renderTargets(selectedTarget) {
   if (input) input.checked = true;
 }
 
-function targetRow({ value, dot, icon, text, meta }) {
+function targetRow({ value, dot, icon, text, meta, setId }) {
   const label = document.createElement("label");
   label.className = "target";
 
@@ -107,6 +108,23 @@ function targetRow({ value, dot, icon, text, meta }) {
     metaEl.className = "meta";
     metaEl.textContent = meta;
     label.appendChild(metaEl);
+  }
+
+  // 既存セットには「前面に出す」ボタンを付ける。
+  if (setId) {
+    const raiseEl = document.createElement("button");
+    raiseEl.type = "button";
+    raiseEl.className = "raise";
+    raiseEl.textContent = "⤴ 前面";
+    raiseEl.title = "このセットの窓をまとめて前面に出す";
+    raiseEl.addEventListener("click", (e) => {
+      // ラジオの選択ではなく前面化だけ行う。
+      e.preventDefault();
+      e.stopPropagation();
+      chrome.runtime.sendMessage({ type: "MLC_RAISE_SET", setId });
+      window.close();
+    });
+    label.appendChild(raiseEl);
   }
   return label;
 }

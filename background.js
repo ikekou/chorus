@@ -24,6 +24,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       } else if (message?.type === "MLC_FLASH_SET") {
         await flashSet(message.setId, message.label, message.color);
         sendResponse({ ok: true });
+      } else if (message?.type === "MLC_RAISE_SET") {
+        await raiseSet(message.setId);
+        sendResponse({ ok: true });
       }
     } catch (err) {
       console.warn("[MultiLLMChat] 処理に失敗しました", err);
@@ -152,6 +155,23 @@ async function flashSet(setId, label, color) {
     chrome.scripting
       .executeScript({ target: { tabId }, func: flashTag, args: [label, color] })
       .catch(() => {});
+  }
+}
+
+// セットの窓をまとめて前面に出す(後からそのセットの会話をまとめて見たいとき用)。
+// 窓のフォーカスを奪うのでポップアップは閉じるが、それが目的の操作。
+async function raiseSet(setId) {
+  const sets = await getSets();
+  const set = sets.find((s) => s.id === setId);
+  if (!set) return;
+  for (const tabId of Object.values(set.tabs)) {
+    try {
+      const tab = await chrome.tabs.get(tabId);
+      await chrome.tabs.update(tabId, { active: true });
+      await chrome.windows.update(tab.windowId, { focused: true });
+    } catch {
+      // 閉じられた窓はスキップ。
+    }
   }
 }
 

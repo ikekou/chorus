@@ -80,6 +80,17 @@
       }
       .target .label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .target .meta { color: var(--muted); font-size: 11px; }
+      .target .raise {
+        flex: 0 0 auto;
+        padding: 2px 7px;
+        font-size: 11px;
+        color: var(--fg);
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .target .raise:hover { background: color-mix(in srgb, var(--fg) 10%, transparent); }
       .providers {
         display: flex;
         gap: 6px;
