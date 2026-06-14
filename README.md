@@ -1,97 +1,94 @@
-# Chorus (Chrome 拡張)
+**English** | [日本語](README.ja.md)
 
-> 複数の AI に一斉に問いかけ、声を揃えて答えてもらう。
+# Chorus (Chrome extension)
 
-1 つの入力欄からプロンプトを書いて確定すると、**ChatGPT / Claude / Gemini** のウィンドウを並べて開き、それぞれに同じプロンプトを自動送信する Chrome 拡張機能(Manifest V3)です。
+> Ask many AIs at once, and let them answer in chorus.
 
-既存のログイン済みセッション(ChatGPT Plus などのサブスク)をそのまま使えるのが特徴で、API キーや従量課金は不要です。
+Chorus is a Manifest V3 Chrome extension. Write a prompt in a single input box, hit send, and it opens **ChatGPT / Claude / Gemini** in tiled windows and auto-sends the same prompt to each.
 
-## 何が新しい・何が便利か
+It reuses your existing logged-in sessions (e.g. a ChatGPT Plus subscription), so **no API key and no usage-based billing** are required.
 
-同種のツールは「独自UIに統合するタイプ」と「タブに自動入力するタイプ」が既にありますが、Chorus は次の点が違います。
+## What's new and useful here
 
-- **本物の画面をそのまま並べる(独自UIでラップしない)。** だから各サービスの**ネイティブ機能がすべて生きる** — モデルセレクター、GPTs、Gemini のモデル切替、Web 検索トグル、Canvas / Artifacts など。独自UI型では使えないものがそのまま使えます。
-- **独立した OS ウィンドウとしてタイル配置。** iframe やサイドパネルではなく、本物のウィンドウを画面に等分で並べます(各サービスは埋め込みを禁止しているため iframe では実現できません)。
-- **複数の「セット」を同時運用できる。** 「調べ物 A 用の 3 窓」と「コーディング B 用の 3 窓」を並行で持ち、送信先セレクタで送り分けられます。どのセットかは**色付きラベルで見分け**、**まとめて前面化**もワンクリック。**セット単位/全セットの一括クローズ**も可能。
-- **追記送信。** 一度開いたチャットに、続けて全員へ同じプロンプトを送れます(背面のウィンドウにも確実に入力)。
-- **既存ログインをそのまま利用。** API キー不要・追加課金なし。
-- **データを一切収集・外部送信しない。** すべてブラウザ内で完結します([PRIVACY.md](PRIVACY.md))。
+Similar tools already exist, in two flavors: ones that **wrap the services in a custom UI**, and ones that **auto-type into tabs**. Chorus differs:
 
-ひとことで言うと「**独自UIに閉じ込めず、本物のチャットを並べて操作を束ねる**」のが Chorus の立ち位置です。
+- **It places the real pages side by side (no custom-UI wrapper).** So every **native feature stays usable** — model selectors, GPTs, Gemini model switching, the web-search toggle, Canvas / Artifacts, and so on. Things a custom UI can't offer keep working.
+- **Tiled as independent OS windows.** Not iframes or a side panel — real windows split evenly across the screen (iframes are impossible here because each service blocks embedding).
+- **Run multiple "sets" at once.** Keep "3 windows for research A" and "3 windows for coding B" in parallel, and route each prompt with a target selector. Tell sets apart with **colored labels**, **bring a whole set to the front** in one click, and **close a set or all sets** at once.
+- **Follow-ups.** Keep sending the same prompt to the already-open chats (reliably typed even in background windows).
+- **Uses your existing logins.** No API key, no extra payment.
+- **Collects and transmits no data.** Everything happens in your browser ([PRIVACY.md](PRIVACY.md)).
 
-## できること
+In one line: Chorus **doesn't trap you in a custom UI — it lines up the real chats and unifies just the driving.**
 
-- ツールバーのアイコンからポップアップを開き、プロンプトを 1 回入力
-- 送信したい LLM をチェックボックスで選択(複数可)
-- 確定すると、選んだ LLM のウィンドウが画面に並んで開き、各サービスにプロンプトを自動入力 → 送信
-- **追記送信:** 一度開いた後は、同じポップアップから続けて送信すると、開いているチャットを再利用して全員に追記送信(新しいウィンドウは開かない)。ウィンドウを閉じた LLM だけ次回また開き直す
+## How it works for you
 
-### セット(複数の会話を同時運用)
+- Open the popup from the toolbar icon and type your prompt once
+- Pick the target models with checkboxes (multiple allowed)
+- On send, the selected models open as tiled windows and the prompt is auto-filled and submitted to each
+- **Follow-ups:** sending again from the same popup reuses the open chats and appends to all of them (no new windows). Only a model whose window you closed is reopened next time
 
-「セット」= 一緒に開いた窓のまとまり(LLM 毎に 1 窓)で、会話スレッドを共有する単位です。
-ポップアップ上部の **送信先** で、送り先を選べます。
+### Sets (running several conversations at once)
 
-- **🆕 新しいセットを開く** … まっさらな会話として、選んだ LLM の窓を新規に並べて開く
-- **既存セット(色付きラベル)** … そのセットの開いている窓へ追記送信(閉じた窓だけ開き直す)
+A **set** is a group of windows opened together (one per model) that share a conversation thread.
+Choose where to send with **Target** at the top of the popup.
 
-複数セットを同時に開けるので、「調べ物 A 用の 3 窓」と「コーディング B 用の 3 窓」を並行運用できます。
-どの窓がどのセットかは、送信先で既存セットを選んだときに各ページへ一瞬表示される
-**色付きラベル帯**で見分けられます(フォーカスは奪わないのでポップアップは開いたまま)。
-セットのラベルは、そのセットを開いた最初のプロンプト冒頭から自動生成されます。
+- **🆕 Open a new set** — start fresh: the selected models open as a new set of tiled windows
+- **An existing set (colored label)** — append to that set's open windows (only closed ones are reopened)
 
-各セット行の **⤴ 前面** ボタンを押すと、そのセットの窓をまとめて前面に出せます。
-後から特定セットの会話を見直したいときに、窓を一つずつ手動で最前面化する手間が省けます
-(この操作は窓にフォーカスを移すため、ポップアップは閉じます)。
+Because multiple sets can be open at once, you can run "3 windows for research A" and "3 windows for coding B" in parallel.
+To see which windows belong to which set, selecting an existing set briefly flashes a **colored label banner** on each of its pages (it doesn't steal focus, so the popup stays open).
+A set's label is auto-generated from the beginning of the first prompt that opened it.
 
-**✕** ボタンでそのセットの窓をまとめて閉じられます。下部の **すべてのセットを閉じる**
-で全セットを一括で閉じられます。閉じる対象は、そのセットで開いた窓だけです
-(後から同じ窓に開いた別タブは閉じません)。
+The **⤴ Front** button on a set row brings that set's windows to the front together, so you don't have to raise each window by hand when you want to review a set later (this moves focus to the windows, so the popup closes).
 
-## 仕組み
+The **✕** button closes that set's windows together. **Close all sets** at the bottom closes every set at once. Only the windows the set opened are closed (tabs you later opened in the same window are left alone).
 
-| ファイル | 役割 |
+## Architecture
+
+| File | Role |
 |---|---|
-| `manifest.json` | 権限・構成の宣言(MV3) |
-| `popup.html` / `popup.js` | プロンプト入力欄と送信先の選択 UI |
-| `background.js` | ウィンドウ生成と、読み込み完了を待ってのスクリプト注入 |
-| `src/injector.js` | 各サイトの入力欄にプロンプトを差し込み、送信する処理 |
-| `src/highlight.js` | セットを見分けるためのラベル帯を一瞬表示する処理 |
-| `src/providers.js` | 各 LLM の URL や DOM セレクタの定義 |
+| `manifest.json` | Permissions and configuration (MV3) |
+| `popup.html` / `popup.js` | Prompt input box and target-selection UI |
+| `background.js` | Window creation, and script injection after load completes |
+| `src/injector.js` | Fills the prompt into each site's input and submits |
+| `src/highlight.js` | Briefly shows a label banner to tell sets apart |
+| `src/providers.js` | URL and DOM selectors for each model |
 
-ポップアップで送信 → `background.js` がウィンドウを開く → ページの読み込み完了を待つ → `chrome.scripting.executeScript` で `injector` を注入し、入力欄へ差し込み & 送信、という流れです。
+Flow: send from the popup → `background.js` opens the windows → it waits for the page to finish loading → `chrome.scripting.executeScript` injects the `injector`, which fills the input and submits.
 
-## インストール(開発者モードで読み込み)
+## Install (load unpacked)
 
-1. Chrome で `chrome://extensions` を開く
-2. 右上の「デベロッパーモード」を ON
-3. 「パッケージ化されていない拡張機能を読み込む」で、このフォルダを選択
-4. ツールバーに表示されるアイコンをクリックして利用
+1. Open `chrome://extensions` in Chrome
+2. Turn on **Developer mode** (top right)
+3. Click **Load unpacked** and select this folder
+4. Use it from the icon that appears in the toolbar
 
-> アイコンは `icons/`(16/32/48/128px)に同梱しています。元データは `icons/icon.svg`。
-> 差し替える場合は SVG を編集し、`qlmanage`(SVG→PNG)+ `sips`(リサイズ)で各サイズを書き出してください。
+> Icons are bundled in `icons/` (16/32/48/128px); the source is `icons/icon.svg`.
+> To replace them, edit the SVG and export each size with `qlmanage` (SVG→PNG) + `sips` (resize).
 
-## 注意点 / 既知の弱点
+## Notes / known limitations
 
-- **DOM セレクタは各社の UI 更新で壊れます。** 動かなくなったら `src/providers.js` のセレクタを修正してください。
-- 入力欄は各社とも contenteditable(リッチエディタ)のため、`value` 代入では認識されません。本拡張では `execCommand('insertText')` を使って React 側に変更を通知しています。
-- 自動送信まで行います。送信せず下書きだけにしたい場合は `src/providers.js` の `autoSend` を `false` にしてください。
+- **DOM selectors break when a service updates its UI.** If it stops working, fix the selectors in `src/providers.js`.
+- Each input box is a contenteditable (rich editor), so assigning `value` isn't recognized. Chorus inserts text via a **synthetic paste event** (`execCommand('insertText')` and direct assignment are fallbacks) so it works reliably even in background windows.
+- It auto-submits. To only draft without sending, set `autoSend` to `false` in `src/providers.js`.
 
-## 対応サービス
+## Supported services
 
 - ChatGPT (`chatgpt.com`)
 - Claude (`claude.ai`)
 - Gemini (`gemini.google.com`)
 
-## リリース
+## Release
 
-Chrome ウェブストアへの公開手順・説明文・権限の正当化理由は [docs/STORE_LISTING.md](docs/STORE_LISTING.md) を参照してください。
+For the Chrome Web Store submission steps, store copy, and permission justifications, see [docs/STORE_LISTING.md](docs/STORE_LISTING.md).
 
-配布用 zip の作成:
+Build the distributable zip:
 
 ```bash
-./scripts/package.sh   # dist/chorus-<version>.zip を生成
+./scripts/package.sh   # produces dist/chorus-<version>.zip
 ```
 
-- 変更履歴: [CHANGELOG.md](CHANGELOG.md)
-- プライバシーポリシー: [PRIVACY.md](PRIVACY.md)
-- ライセンス: [MIT](LICENSE)
+- Changelog: [CHANGELOG.md](CHANGELOG.md)
+- Privacy policy: [PRIVACY.md](PRIVACY.md)
+- License: [MIT](LICENSE)
