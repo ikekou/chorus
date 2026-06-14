@@ -1,40 +1,63 @@
 import { PROVIDERS } from "./src/providers.js";
 import { injectPrompt } from "./src/injector.js";
+import { flashTag } from "./src/highlight.js";
 
-// 開いた LLM タブを provider 単位で記録しておくキー。
-// chrome.storage.session はブラウザを閉じると消える(= 1セッション限り)ので、
-// 「今開いているチャットの追記送信先」の管理にちょうどよい。
-const SESSION_KEY = "mlc_sessions";
+// 開いている「セット」を記録するキー。
+// セット = 一緒に開いた窓のまとまり(provider 毎に1タブ)で、会話スレッドを共有する単位。
+// chrome.storage.session はブラウザを閉じると消えるので、1セッション限りの管理にちょうどよい。
+//
+// 形: [{ id, label, createdAt, tabs: { chatgpt: tabId, ... } }]
+const SETS_KEY = "mlc_sets";
 
-// ポップアップからの送信指示を受け取る。
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-  if (message?.type === "MLC_SEND") {
-    dispatch(message.prompt, message.providers).catch((err) =>
-      console.warn("[MultiLLMChat] 送信に失敗しました", err)
-    );
-    sendResponse({ ok: true });
-  }
-  return false;
+  (async () => {
+    try {
+      if (message?.type === "MLC_SEND") {
+        const setId = await dispatch(
+          message.prompt,
+          message.providers,
+          message.target
+        );
+        sendResponse({ ok: true, setId });
+      } else if (message?.type === "MLC_GET_SETS") {
+        sendResponse({ sets: await listSets() });
+      } else if (message?.type === "MLC_FLASH_SET") {
+        await flashSet(message.setId, message.label, message.color);
+        sendResponse({ ok: true });
+      }
+    } catch (err) {
+      console.warn("[MultiLLMChat] 処理に失敗しました", err);
+      sendResponse({ ok: false });
+    }
+  })();
+  return true; // 非同期で sendResponse するため
 });
 
-// タブが閉じられたら記録から外す(次回は新規ウィンドウで開き直す)。
+// タブが閉じられたら記録から外す(空になったセットは破棄)。
 chrome.tabs.onRemoved.addListener((tabId) => {
   forgetTab(tabId).catch(() => {});
 });
 
-// 選択された LLM へプロンプトを送る。
-// 既に開いているタブがあればそれに追記送信、無ければウィンドウを並べて開く。
-async function dispatch(prompt, providerIds) {
-  const targets = providerIds.map((id) => PROVIDERS[id]).filter(Boolean);
-  if (targets.length === 0) return;
+// プロンプトを送信先(新規セット or 既存セット)へ送る。返り値は対象セットの id。
+async function dispatch(prompt, providerIds, target) {
+  const providers = providerIds.map((id) => PROVIDERS[id]).filter(Boolean);
+  if (providers.length === 0) return null;
 
-  const sessions = await getSessions();
+  const sets = await getSets();
 
-  // 既存タブ(再利用)と新規オープンに振り分ける。
+  // 送信先セットを決める(既存が見つからなければ新規作成)。
+  let set =
+    target && target !== "new" ? sets.find((s) => s.id === target) : null;
+  if (!set) {
+    set = { id: makeId(), label: makeLabel(prompt), createdAt: Date.now(), tabs: {} };
+    sets.push(set);
+  }
+
+  // セット内の生存タブ(再利用)と、新規に開く必要があるものに振り分ける。
   const reuse = [];
   const fresh = [];
-  for (const provider of targets) {
-    const tabId = sessions[provider.id];
+  for (const provider of providers) {
+    const tabId = set.tabs[provider.id];
     if (tabId != null && (await isTabAlive(tabId))) {
       reuse.push({ provider, tabId });
     } else {
@@ -42,26 +65,33 @@ async function dispatch(prompt, providerIds) {
     }
   }
 
-  // 既存タブには即座に追記送信(読み込み待ち不要)。
+  // 生存タブには即・追記送信。
   for (const { provider, tabId } of reuse) {
     injectInto(tabId, provider, prompt);
   }
 
-  // 新規分はウィンドウを並べて開く。
+  // 新規分はウィンドウを並べて開き、セットに登録する。
   if (fresh.length > 0) {
     const area = await getWorkArea();
     const width = Math.floor(area.width / fresh.length);
     await Promise.all(
-      fresh.map((provider, index) =>
-        openAndInject(provider, prompt, {
+      fresh.map(async (provider, index) => {
+        const tabId = await openWindow(provider, {
           left: area.left + index * width,
           top: area.top,
           width,
           height: area.height,
-        })
-      )
+        });
+        if (tabId != null) {
+          set.tabs[provider.id] = tabId;
+          waitForLoadThenInject(tabId, provider, prompt);
+        }
+      })
     );
   }
+
+  await saveSets(sets);
+  return set.id;
 }
 
 // プライマリディスプレイの作業領域(タスクバー等を除いた範囲)を取得する。
@@ -76,8 +106,7 @@ async function getWorkArea() {
   }
 }
 
-// ウィンドウを開き、記録し、読み込み完了を待ってプロンプトを注入する。
-async function openAndInject(provider, prompt, bounds) {
+async function openWindow(provider, bounds) {
   const win = await chrome.windows.create({
     url: provider.url,
     type: "normal",
@@ -87,12 +116,7 @@ async function openAndInject(provider, prompt, bounds) {
     width: bounds.width,
     height: bounds.height,
   });
-
-  const tabId = win.tabs?.[0]?.id;
-  if (tabId == null) return;
-
-  await rememberTab(provider.id, tabId);
-  waitForLoadThenInject(tabId, provider, prompt);
+  return win.tabs?.[0]?.id ?? null;
 }
 
 // タブの読み込み完了を待ち、SPA の描画を見越して少し遅らせて注入する。
@@ -105,7 +129,7 @@ function waitForLoadThenInject(tabId, provider, prompt) {
   chrome.tabs.onUpdated.addListener(listener);
 }
 
-// 指定タブにプロンプトを注入する(追記送信・初回送信の共通処理)。
+// 指定タブにプロンプトを注入する(初回・追記の共通処理)。
 function injectInto(tabId, provider, prompt) {
   chrome.scripting
     .executeScript({
@@ -118,11 +142,64 @@ function injectInto(tabId, provider, prompt) {
     );
 }
 
-// --- セッション(開いているタブ)の記録 -------------------------------
+// セットの各ページに一瞬ラベル帯を出して「どの窓か」を見分けさせる(フォーカスは奪わない)。
+async function flashSet(setId, label, color) {
+  const sets = await getSets();
+  const set = sets.find((s) => s.id === setId);
+  if (!set) return;
+  for (const tabId of Object.values(set.tabs)) {
+    if (!(await isTabAlive(tabId))) continue;
+    chrome.scripting
+      .executeScript({ target: { tabId }, func: flashTag, args: [label, color] })
+      .catch(() => {});
+  }
+}
 
-async function getSessions() {
-  const stored = await chrome.storage.session.get(SESSION_KEY);
-  return stored[SESSION_KEY] ?? {};
+// --- セット記録のヘルパ ------------------------------------------------
+
+async function getSets() {
+  const stored = await chrome.storage.session.get(SETS_KEY);
+  return stored[SETS_KEY] ?? [];
+}
+
+async function saveSets(sets) {
+  await chrome.storage.session.set({ [SETS_KEY]: sets });
+}
+
+// 死んだタブ・空セットを掃除して、ポップアップ向けの一覧を返す。
+async function listSets() {
+  const sets = await getSets();
+  let changed = false;
+  for (const set of sets) {
+    for (const [providerId, tabId] of Object.entries(set.tabs)) {
+      if (!(await isTabAlive(tabId))) {
+        delete set.tabs[providerId];
+        changed = true;
+      }
+    }
+  }
+  const alive = sets.filter((s) => Object.keys(s.tabs).length > 0);
+  if (alive.length !== sets.length) changed = true;
+  if (changed) await saveSets(alive);
+
+  return alive
+    .sort((a, b) => a.createdAt - b.createdAt)
+    .map((s) => ({ id: s.id, label: s.label, providers: Object.keys(s.tabs) }));
+}
+
+async function forgetTab(closedTabId) {
+  const sets = await getSets();
+  let changed = false;
+  for (const set of sets) {
+    for (const [providerId, tabId] of Object.entries(set.tabs)) {
+      if (tabId === closedTabId) {
+        delete set.tabs[providerId];
+        changed = true;
+      }
+    }
+  }
+  if (!changed) return;
+  await saveSets(sets.filter((s) => Object.keys(s.tabs).length > 0));
 }
 
 async function isTabAlive(tabId) {
@@ -134,20 +211,11 @@ async function isTabAlive(tabId) {
   }
 }
 
-async function rememberTab(providerId, tabId) {
-  const sessions = await getSessions();
-  sessions[providerId] = tabId;
-  await chrome.storage.session.set({ [SESSION_KEY]: sessions });
+function makeId() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
-async function forgetTab(tabId) {
-  const sessions = await getSessions();
-  let changed = false;
-  for (const [providerId, id] of Object.entries(sessions)) {
-    if (id === tabId) {
-      delete sessions[providerId];
-      changed = true;
-    }
-  }
-  if (changed) await chrome.storage.session.set({ [SESSION_KEY]: sessions });
+function makeLabel(prompt) {
+  const text = prompt.replace(/\s+/g, " ").trim();
+  return text.length > 24 ? `${text.slice(0, 24)}…` : text;
 }
