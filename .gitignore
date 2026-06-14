@@ -13,3 +13,6 @@ node_modules/
 
 # 配布用パッケージの出力先
 dist/
+
+# 申請・公開手順の内部資料(ローカルのみ。公開リポジトリには含めない)
+docs/STORE_LISTING.md

@@ -84,9 +84,7 @@
 - Claude (`claude.ai`)
 - Gemini (`gemini.google.com`)
 
-## リリース
-
-Chrome ウェブストアへの公開手順・説明文・権限の正当化理由は [docs/STORE_LISTING.md](docs/STORE_LISTING.md) を参照してください。
+## ビルド
 
 配布用 zip の作成:
 

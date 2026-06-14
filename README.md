@@ -79,9 +79,7 @@ Flow: send from the popup → `background.js` opens the windows → it waits for
 - Claude (`claude.ai`)
 - Gemini (`gemini.google.com`)
 
-## Release
-
-For the Chrome Web Store submission steps, store copy, and permission justifications, see [docs/STORE_LISTING.md](docs/STORE_LISTING.md).
+## Build
 
 Build the distributable zip:
 
