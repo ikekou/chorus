@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """アイコンを透過 PNG で書き出す。
 
-icons/ に以下を生成する:
-- icon-16/32/48/128/512.png … ストア・拡張一覧用(角丸プレート + 図柄)
-- icon-tb-16/32/48.png       … ツールバー用(背景透明・図柄のみ)
+icons/icon-16/32/48/128/512.png を生成する(角丸プレート + 図柄)。
+角丸の外側は透過なので、ツールバー・拡張一覧・ストアのどこでも崩れない。
 
 qlmanage は書き出し時に白背景を焼き込んでしまうため、Pillow で直接描画する。
 高解像度で描いて縮小(スーパーサンプリング)し、エッジを滑らかにする。
@@ -34,12 +33,11 @@ HEADS = [(23, 44, BLUE), (64, 26, GREEN), (105, 44, PINK)]
 HEAD_R = 11
 
 
-def render(plate):
+def render():
     size = BASE * S
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    if plate:
-        d.rounded_rectangle([0, 0, size - 1, size - 1], radius=28 * S, fill=PLATE)
+    d.rounded_rectangle([0, 0, size - 1, size - 1], radius=28 * S, fill=PLATE)
     for x, y, w, h, color in BARS:
         d.rounded_rectangle(
             [x * S, y * S, (x + w) * S - 1, (y + h) * S - 1],
@@ -59,12 +57,9 @@ def save(img, name, size):
 
 
 def main():
-    plated = render(plate=True)
-    toolbar = render(plate=False)
+    img = render()
     for s in (16, 32, 48, 128, 512):
-        save(plated, f"icon-{s}.png", s)
-    for s in (16, 32, 48):
-        save(toolbar, f"icon-tb-{s}.png", s)
+        save(img, f"icon-{s}.png", s)
     print("icons written to", os.path.normpath(ICONS_DIR))
 
 
