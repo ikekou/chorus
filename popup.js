@@ -53,7 +53,13 @@ async function send() {
 
   sendEl.disabled = true;
   await chrome.runtime.sendMessage({ type: "MLC_SEND", prompt, providers });
-  window.close();
+
+  // 追記送信を続けられるよう、ポップアップは閉じずに入力欄だけ空にする。
+  // (初回はウィンドウが前面に出てポップアップは自然に閉じる)
+  promptEl.value = "";
+  saveState();
+  sendEl.disabled = false;
+  promptEl.focus();
 }
 
 promptEl.addEventListener("input", saveState);
