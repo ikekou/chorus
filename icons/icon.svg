@@ -1,15 +1,13 @@
 <svg width="512" height="512" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-  <!-- Chorus: 3人の歌い手(頭=丸 + 体=ピル)。中央が高い左右対称の構図。
-       コンテンツは全周マージン 24px で統一。色はセットの色分けに対応。 -->
+  <!-- ストア/拡張一覧用:角丸プレート + 3人の歌い手。
+       図柄はプレートをしっかり埋める大きさ(余白を詰めて窮屈さを解消)。 -->
   <rect x="0" y="0" width="128" height="128" rx="28" fill="#17181b"/>
-
-  <!-- 体(ピル):baseline y=104、幅16、間隔16 -->
-  <rect x="24" y="63" width="16" height="41" rx="8" fill="#3b82f6"/>
-  <rect x="56" y="47" width="16" height="57" rx="8" fill="#22c55e"/>
-  <rect x="88" y="63" width="16" height="41" rx="8" fill="#ec4899"/>
-
-  <!-- 頭(丸):各体の真上、間隔は揃える -->
-  <circle cx="32" cy="48" r="8" fill="#3b82f6"/>
-  <circle cx="64" cy="32" r="8" fill="#22c55e"/>
-  <circle cx="96" cy="48" r="8" fill="#ec4899"/>
+  <!-- 体(ピル) -->
+  <rect x="12" y="62" width="22" height="50" rx="11" fill="#3b82f6"/>
+  <rect x="53" y="44" width="22" height="68" rx="11" fill="#22c55e"/>
+  <rect x="94" y="62" width="22" height="50" rx="11" fill="#ec4899"/>
+  <!-- 頭(丸) -->
+  <circle cx="23" cy="44" r="11" fill="#3b82f6"/>
+  <circle cx="64" cy="26" r="11" fill="#22c55e"/>
+  <circle cx="105" cy="44" r="11" fill="#ec4899"/>
 </svg>
