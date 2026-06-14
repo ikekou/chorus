@@ -1,14 +1,14 @@
 [English](README.md) | **日本語**
 
-# Chorus (Chrome 拡張)
+# Chorus
 
-> 複数の AI に一斉に問いかけ、声を揃えて答えてもらう。
+### 1回入力するだけで、ChatGPT・Claude・Gemini が同時に回答。本物の画面を並べて表示。
+
+入力したプロンプトを3つすべてへ自動で入力・送信する Chrome 拡張機能。既存のログインをそのまま利用するので **APIキー不要・追加費用なし**。
 
 ![同じプロンプトに答える ChatGPT・Claude・Gemini を画面に並べたところ](docs/images/side-by-side.jpg)
 
-1 つの入力欄からプロンプトを書いて確定すると、**ChatGPT / Claude / Gemini** のウィンドウを並べて開き、それぞれに同じプロンプトを自動送信する Chrome 拡張機能(Manifest V3)です。
-
-既存のログイン済みセッション(ChatGPT Plus などのサブスク)をそのまま使えるのが特徴で、API キーや従量課金は不要です。
+既存のログイン済みセッション(ChatGPT Plus などのサブスク)をそのまま使えるので、API キーや従量課金は不要です。
 
 ## 何が新しい・何が便利か
 

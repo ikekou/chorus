@@ -1,14 +1,14 @@
 **English** | [日本語](README.ja.md)
 
-# Chorus (Chrome extension)
+# Chorus
 
-> Ask many AIs at once, and let them answer in chorus.
+### Type one prompt → ChatGPT, Claude & Gemini all answer it at once, in real windows side by side.
+
+A Chrome extension that auto-fills and sends your prompt to all three — using your existing logins. **No API key, no extra cost.**
 
 ![ChatGPT, Claude and Gemini opened side by side, each answering the same prompt](docs/images/side-by-side.jpg)
 
-Chorus is a Manifest V3 Chrome extension. Write a prompt in a single input box, hit send, and it opens **ChatGPT / Claude / Gemini** in tiled windows and auto-sends the same prompt to each.
-
-It reuses your existing logged-in sessions (e.g. a ChatGPT Plus subscription), so **no API key and no usage-based billing** are required.
+It reuses your existing logged-in sessions (e.g. a ChatGPT Plus subscription), so no API key and no usage-based billing are required.
 
 ## What's new and useful here
 
