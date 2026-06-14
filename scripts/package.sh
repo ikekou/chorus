@@ -21,6 +21,9 @@ zip -r "$OUT" \
   icons/icon-32.png \
   icons/icon-48.png \
   icons/icon-128.png \
+  icons/icon-tb-16.png \
+  icons/icon-tb-32.png \
+  icons/icon-tb-48.png \
   -x '*/.DS_Store' >/dev/null
 
 echo "Created $OUT"
