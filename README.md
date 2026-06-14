@@ -4,6 +4,8 @@
 
 > Ask many AIs at once, and let them answer in chorus.
 
+![ChatGPT, Claude and Gemini opened side by side, each answering the same prompt](docs/images/side-by-side.jpg)
+
 Chorus is a Manifest V3 Chrome extension. Write a prompt in a single input box, hit send, and it opens **ChatGPT / Claude / Gemini** in tiled windows and auto-sends the same prompt to each.
 
 It reuses your existing logged-in sessions (e.g. a ChatGPT Plus subscription), so **no API key and no usage-based billing** are required.
@@ -22,6 +24,8 @@ Similar tools already exist, in two flavors: ones that **wrap the services in a 
 In one line: Chorus **doesn't trap you in a custom UI — it lines up the real chats and unifies just the driving.**
 
 ## How it works for you
+
+<img src="docs/images/popup.jpg" alt="The Chorus popup: one input box, a target selector for conversation sets, and model checkboxes" width="420">
 
 - Open the popup from the toolbar icon and type your prompt once
 - Pick the target models with checkboxes (multiple allowed)
