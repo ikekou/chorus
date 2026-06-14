@@ -28,9 +28,10 @@ PINK = rgba("#ec4899")
 PLATE = rgba("#17181b")
 
 # 体(ピル): x, y, w, h, color  / 頭(丸): cx, cy, color(半径は HEAD_R)
-BARS = [(12, 62, 22, 50, BLUE), (53, 44, 22, 68, GREEN), (94, 62, 22, 50, PINK)]
-HEADS = [(23, 44, BLUE), (64, 26, GREEN), (105, 44, PINK)]
-HEAD_R = 11
+# 全周マージン約24pxの、余白広めで上品なレイアウト。
+BARS = [(24, 63, 16, 41, BLUE), (56, 47, 16, 57, GREEN), (88, 63, 16, 41, PINK)]
+HEADS = [(32, 48, BLUE), (64, 32, GREEN), (96, 48, PINK)]
+HEAD_R = 8
 
 
 def render():
