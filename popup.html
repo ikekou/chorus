@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -151,15 +151,15 @@
   </head>
   <body>
     <h1>Chorus</h1>
-    <textarea id="prompt" placeholder="プロンプトを入力して送信…"></textarea>
-    <div class="section-label">送信先</div>
+    <textarea id="prompt" placeholder="Type a prompt and send…"></textarea>
+    <div class="section-label">Target</div>
     <div class="targets" id="targets"></div>
-    <div class="section-label">送信するモデル</div>
+    <div class="section-label">Models</div>
     <div class="providers" id="providers"></div>
     <div class="row">
-      <button class="send" id="send">まとめて送信</button>
+      <button class="send" id="send">Send to all</button>
     </div>
-    <p class="hint"><kbd>⌘</kbd> + <kbd>Enter</kbd> でも送信できます。</p>
+    <p class="hint"><kbd>⌘</kbd> + <kbd>Enter</kbd> also sends.</p>
     <script type="module" src="popup.js"></script>
   </body>
 </html>

@@ -51,7 +51,7 @@ function colorFor(index) {
 
 // セットのラベル表示。番号 + 内容(最初のプロンプト冒頭)。
 function displayLabel(set, index) {
-  return { number: `${index + 1}`, text: set.label || "(無題)" };
+  return { number: `${index + 1}`, text: set.label || "(untitled)" };
 }
 
 function renderTargets(selectedTarget) {
@@ -59,7 +59,7 @@ function renderTargets(selectedTarget) {
 
   // 先頭は常に「新しいセット」。
   targetsEl.appendChild(
-    targetRow({ value: "new", dot: "transparent", icon: "🆕", text: "新しいセットを開く" })
+    targetRow({ value: "new", dot: "transparent", icon: "🆕", text: "Open a new set" })
   );
 
   sets.forEach((set, index) => {
@@ -79,7 +79,7 @@ function renderTargets(selectedTarget) {
     const closeAllEl = document.createElement("button");
     closeAllEl.type = "button";
     closeAllEl.className = "close-all";
-    closeAllEl.textContent = "すべてのセットを閉じる";
+    closeAllEl.textContent = "Close all sets";
     closeAllEl.addEventListener("click", async () => {
       await chrome.runtime.sendMessage({ type: "MLC_CLOSE_ALL" });
       await refreshSets("new");
@@ -120,8 +120,8 @@ function targetRow({ value, dot, icon, text, setId }) {
     const raiseEl = document.createElement("button");
     raiseEl.type = "button";
     raiseEl.className = "btn";
-    raiseEl.textContent = "⤴ 前面";
-    raiseEl.title = "このセットの窓をまとめて前面に出す";
+    raiseEl.textContent = "⤴ Front";
+    raiseEl.title = "Bring this set's windows to the front";
     raiseEl.addEventListener("click", (e) => {
       // ラジオの選択ではなく前面化だけ行う。
       e.preventDefault();
@@ -134,7 +134,7 @@ function targetRow({ value, dot, icon, text, setId }) {
     closeEl.type = "button";
     closeEl.className = "btn close";
     closeEl.textContent = "✕";
-    closeEl.title = "このセットの窓をまとめて閉じる";
+    closeEl.title = "Close this set's windows";
     closeEl.addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopPropagation();
