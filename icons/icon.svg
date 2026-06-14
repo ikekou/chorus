@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Chorus: 高さの違う3本のバー(複数の声=和音)を、セットの色分けで -->
+  <rect x="0" y="0" width="128" height="128" rx="28" fill="#17181b"/>
+  <g>
+    <rect x="25" y="52" width="18" height="46" rx="9" fill="#3b82f6"/>
+    <rect x="55" y="28" width="18" height="70" rx="9" fill="#22c55e"/>
+    <rect x="85" y="44" width="18" height="54" rx="9" fill="#ec4899"/>
+  </g>
+  <!-- 各バーの上に小さな丸(声の主) -->
+  <g>
+    <circle cx="34" cy="40" r="7" fill="#3b82f6"/>
+    <circle cx="64" cy="18" r="7" fill="#22c55e"/>
+    <circle cx="94" cy="32" r="7" fill="#ec4899"/>
+  </g>
+</svg>
