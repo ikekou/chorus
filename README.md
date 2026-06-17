@@ -6,6 +6,8 @@
 
 A Chrome extension that auto-fills and sends your prompt to all three — using your existing logins. **No API key, no extra cost.**
 
+### ▶︎ [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/chorus/jejadmfapoignjkhjodmnjfkjmcfljah)
+
 ![ChatGPT, Claude and Gemini opened side by side, each answering the same prompt](docs/images/side-by-side.jpg)
 
 It reuses your existing logged-in sessions (e.g. a ChatGPT Plus subscription), so no API key and no usage-based billing are required.

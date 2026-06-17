@@ -6,6 +6,8 @@
 
 入力したプロンプトを3つすべてへ自動で入力・送信する Chrome 拡張機能。既存のログインをそのまま利用するので **APIキー不要・追加費用なし**。
 
+### ▶︎ [Chrome ウェブストアからインストール](https://chromewebstore.google.com/detail/chorus/jejadmfapoignjkhjodmnjfkjmcfljah)
+
 ![同じプロンプトに答える ChatGPT・Claude・Gemini を画面に並べたところ](docs/images/side-by-side.jpg)
 
 既存のログイン済みセッション(ChatGPT Plus などのサブスク)をそのまま使えるので、API キーや従量課金は不要です。
