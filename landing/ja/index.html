@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chorus — Ask once. Compare ChatGPT, Claude &amp; Gemini instantly.</title>
-<meta name="description" content="Chorus auto-sends your prompt to ChatGPT, Claude and Gemini and tiles their real windows across your screen — so you compare answers in seconds, not copy-paste. Chrome extension. No API key. Free.">
+<title>Chorus — ChatGPT、Claude、Gemini を一度に比較。</title>
+<meta name="description" content="Chorus はひとつのプロンプトを ChatGPT、Claude、Gemini へ自動送信し、本物のウィンドウを画面に並べます。Chrome拡張。APIキー不要。無料。">
 <meta name="theme-color" content="#09090b">
-<link rel="canonical" href="https://chorus.ikekou.jp/">
+<link rel="canonical" href="https://chorus.ikekou.jp/ja/">
 <link rel="alternate" hreflang="en" href="https://chorus.ikekou.jp/">
 <link rel="alternate" hreflang="ja" href="https://chorus.ikekou.jp/ja/">
 <link rel="alternate" hreflang="x-default" href="https://chorus.ikekou.jp/">
-<meta property="og:title" content="Chorus — Ask once. Compare ChatGPT, Claude &amp; Gemini instantly.">
-<meta property="og:description" content="Auto-send one prompt to all three and tile their real windows across your screen. No API key, no extra cost.">
+<meta property="og:title" content="Chorus — ChatGPT、Claude、Gemini を一度に比較。">
+<meta property="og:description" content="ひとつのプロンプトを3つすべてへ自動送信し、本物のウィンドウを画面に並べます。APIキー不要、追加課金なし。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://chorus.ikekou.jp/">
+<meta property="og:url" content="https://chorus.ikekou.jp/ja/">
 <meta property="og:site_name" content="Chorus">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://chorus.ikekou.jp/assets/og-image.png">
-<meta property="og:image:secure_url" content="https://chorus.ikekou.jp/assets/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://chorus.ikekou.jp/assets/og-image-ja.png">
+<meta property="og:image:secure_url" content="https://chorus.ikekou.jp/assets/og-image-ja.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chorus: compare ChatGPT, Claude and Gemini side by side.">
+<meta property="og:image:alt" content="Chorus: ChatGPT、Claude、Gemini を横並びで比較。">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Chorus — Ask once. Compare ChatGPT, Claude &amp; Gemini instantly.">
-<meta name="twitter:description" content="Auto-send one prompt to all three and tile their real windows across your screen. No API key, no extra cost.">
-<meta name="twitter:image" content="https://chorus.ikekou.jp/assets/og-image.png">
-<meta name="twitter:image:alt" content="Chorus: compare ChatGPT, Claude and Gemini side by side.">
-<link rel="icon" href="assets/icon-128.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/icon-512.png">
+<meta name="twitter:title" content="Chorus — ChatGPT、Claude、Gemini を一度に比較。">
+<meta name="twitter:description" content="ひとつのプロンプトを3つすべてへ自動送信。APIキー不要、追加課金なし。">
+<meta name="twitter:image" content="https://chorus.ikekou.jp/assets/og-image-ja.png">
+<meta name="twitter:image:alt" content="Chorus: ChatGPT、Claude、Gemini を横並びで比較。">
+<link rel="icon" href="../assets/icon-128.png" type="image/png">
+<link rel="apple-touch-icon" href="../assets/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -67,8 +68,8 @@
       <a href="#how" style="text-decoration:none;font-size:14px;color:#9a9aa3;" data-i18n="nav_how">How it works</a>
       <a href="#why" style="text-decoration:none;font-size:14px;color:#9a9aa3;" data-i18n="nav_why">Why it's different</a>
       <div style="display:flex;gap:3px;padding:3px;border-radius:999px;background:#141417;border:1px solid rgba(255,255,255,.1);">
-        <a href="./" id="ch-en" style="text-decoration:none;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;padding:5px 12px;border-radius:999px;background:#f2f2f3;color:#0e0e10;">EN</a>
-        <a href="ja/" id="ch-ja" style="text-decoration:none;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;padding:5px 12px;border-radius:999px;background:transparent;color:#9a9aa3;">日本語</a>
+        <a href="../" id="ch-en" style="text-decoration:none;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;padding:5px 12px;border-radius:999px;background:transparent;color:#9a9aa3;">EN</a>
+        <a href="./" id="ch-ja" style="text-decoration:none;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;padding:5px 12px;border-radius:999px;background:#f2f2f3;color:#0e0e10;">日本語</a>
       </div>
       <a class="ch-cta" href="https://chromewebstore.google.com/detail/chorus/jejadmfapoignjkhjodmnjfkjmcfljah" target="_blank" rel="noopener" style="text-decoration:none;white-space:nowrap;font-size:14px;font-weight:600;color:#0e0e10;background:#f2f2f3;padding:9px 16px;border-radius:9px;" data-i18n="nav_cta">Add to Chrome</a>
     </div>
@@ -78,15 +79,15 @@
   <header style="position:relative;background:radial-gradient(120% 80% at 80% 0%,rgba(33,179,90,.07),transparent 55%),radial-gradient(90% 70% at 10% 10%,rgba(77,139,240,.07),transparent 55%);">
     <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:0.92fr 1.08fr;gap:54px;align-items:center;padding:76px 40px 84px;">
       <div>
-        <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;font-size:12px;color:#b6b6bd;margin-bottom:28px;"><span style="width:7px;height:7px;border-radius:50%;background:#21b35a;"></span><span data-i18n="badge">Chrome extension · No API key · Free</span></div>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;font-size:12px;color:#b6b6bd;margin-bottom:28px;"><span style="width:7px;height:7px;border-radius:50%;background:#21b35a;"></span><span data-i18n="badge">Chrome拡張 · APIキー不要 · 無料</span></div>
         <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:58px;line-height:1.04;letter-spacing:-.03em;margin:0 0 22px;text-wrap:balance;" data-i18n="hero_h">Ask once. Compare <span style="color:#4d8bf0;">ChatGPT</span>, <span style="color:#21b35a;">Claude</span> &amp; <span style="color:#ec3f93;">Gemini</span> instantly.</h1>
-        <p style="font-size:19px;line-height:1.6;color:#a8a8b0;margin:0 0 34px;max-width:520px;text-wrap:pretty;" data-i18n="hero_sub">Chorus auto-sends your prompt to all three and tiles their real windows across your screen — so you compare answers in seconds, not copy-paste.</p>
+        <p style="font-size:19px;line-height:1.6;color:#a8a8b0;margin:0 0 34px;max-width:520px;text-wrap:pretty;" data-i18n="hero_sub">Chorus がプロンプトを3つすべてへ自動送信し、本物のウィンドウを画面に並べます。コピペ不要、数秒で回答を見比べられます。</p>
         <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
           <a class="ch-cta" href="https://chromewebstore.google.com/detail/chorus/jejadmfapoignjkhjodmnjfkjmcfljah" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:#0e0e10;background:#f2f2f3;padding:15px 26px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.3);">
             <span style="display:inline-flex;align-items:flex-end;gap:2.5px;height:15px;"><span style="display:flex;flex-direction:column;align-items:center;gap:1.5px;"><span style="width:5px;height:5px;border-radius:50%;background:#4d8bf0;"></span><span style="width:5px;height:8px;border-radius:2px;background:#4d8bf0;"></span></span><span style="display:flex;flex-direction:column;align-items:center;gap:1.5px;"><span style="width:5px;height:5px;border-radius:50%;background:#21b35a;"></span><span style="width:5px;height:11px;border-radius:2px;background:#21b35a;"></span></span><span style="display:flex;flex-direction:column;align-items:center;gap:1.5px;"><span style="width:5px;height:5px;border-radius:50%;background:#ec3f93;"></span><span style="width:5px;height:8px;border-radius:2px;background:#ec3f93;"></span></span></span>
             <span data-i18n="cta_install">Install free — Chrome Web Store</span>
           </a>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6f6f77;" data-i18n="hero_note">Uses your existing logins</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6f6f77;" data-i18n="hero_note">今お使いのログインで動作</span>
         </div>
       </div>
 
@@ -132,7 +133,7 @@
         <span style="display:flex;align-items:center;gap:8px;color:#c8c8cd;"><span style="width:8px;height:8px;border-radius:50%;background:#21b35a;"></span>Claude</span>
         <span style="display:flex;align-items:center;gap:8px;color:#c8c8cd;"><span style="width:8px;height:8px;border-radius:50%;background:#ec3f93;"></span>Gemini</span>
         <span style="width:1px;height:16px;background:rgba(255,255,255,.12);"></span>
-        <span data-i18n="trust_priv">No data collected · everything stays in your browser</span>
+        <span data-i18n="trust_priv">データ収集なし · すべてブラウザ内で完結</span>
       </div>
     </div>
   </header>
@@ -142,7 +143,7 @@
     <div style="max-width:1000px;margin:0 auto;text-align:center;">
       <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f77;margin-bottom:18px;" data-i18n="diff_kicker">Why it's different</div>
       <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:44px;line-height:1.1;letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance;" data-i18n="diff_h">Not another chat wrapper. The real pages — kept whole.</h2>
-      <p style="font-size:18px;line-height:1.6;color:#a8a8b0;max-width:700px;margin:0 auto 52px;text-wrap:pretty;" data-i18n="diff_p">Most multi-AI tools trap you in a custom UI and strip features away. Chorus opens the actual ChatGPT, Claude and Gemini as real, tiled windows — so everything keeps working.</p>
+      <p style="font-size:18px;line-height:1.6;color:#a8a8b0;max-width:700px;margin:0 auto 52px;text-wrap:pretty;" data-i18n="diff_p">多くのマルチAIツールは独自UIに閉じ込め、機能を削ってしまいます。Chorus は本物の ChatGPT・Claude・Gemini を実ウィンドウで並べて開くので、全部そのまま動きます。</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left;">
         <div style="background:#141417;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;">
           <div style="font-size:13px;font-weight:600;color:#7a7a82;margin-bottom:18px;" data-i18n="diff_other_t">Custom-UI tools</div>
@@ -170,12 +171,12 @@
   <section style="padding:96px 40px;background:#09090b;">
     <div style="max-width:1180px;margin:0 auto;text-align:center;">
       <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance;" data-i18n="proof_h">One prompt. Three real answers, side by side.</h2>
-      <p style="font-size:17px;line-height:1.6;color:#a8a8b0;max-width:620px;margin:0 auto 44px;text-wrap:pretty;" data-i18n="proof_p">This is the genuine ChatGPT, Claude and Gemini — each answering the same question in its own real window.</p>
+      <p style="font-size:17px;line-height:1.6;color:#a8a8b0;max-width:620px;margin:0 auto 44px;text-wrap:pretty;" data-i18n="proof_p">これは本物の ChatGPT・Claude・Gemini。同じ質問に、それぞれが自分のウィンドウで答えています。</p>
       <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px rgba(0,0,0,.45);background:#161619;">
         <div style="display:flex;align-items:center;gap:10px;padding:11px 16px;background:#1d1d22;border-bottom:1px solid rgba(255,255,255,.07);">
           <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#ef5f57;"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e;"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840;"></span></div>
         </div>
-        <img src="assets/side-by-side.jpg" alt="ChatGPT, Claude and Gemini opened side by side, each answering the same prompt" style="display:block;width:100%;height:auto;" />
+        <img src="../assets/side-by-side.jpg" alt="ChatGPT、Claude、Gemini が横並びで同じプロンプトに答えている画面" style="display:block;width:100%;height:auto;" />
       </div>
     </div>
   </section>
@@ -184,22 +185,22 @@
   <section id="how" style="padding:96px 40px;background:#0b0b0d;border-top:1px solid rgba(255,255,255,.06);">
     <div style="max-width:1100px;margin:0 auto;">
       <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;letter-spacing:-.02em;margin:0 0 14px;text-align:center;" data-i18n="how_h">Three steps. One prompt.</h2>
-      <p style="font-size:17px;color:#a8a8b0;text-align:center;margin:0 auto 52px;max-width:540px;" data-i18n="how_sub">From the toolbar icon to three answers — in about five seconds.</p>
+      <p style="font-size:17px;color:#a8a8b0;text-align:center;margin:0 auto 52px;max-width:540px;" data-i18n="how_sub">ツールバーのアイコンから3つの回答まで、およそ5秒。</p>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
         <div style="background:#121215;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#4d8bf0;margin-bottom:16px;">01</div>
           <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="step1_t">Type your prompt once</h3>
-          <p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="step1_p">Open the popup from the toolbar and write a single prompt.</p>
+          <p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="step1_p">ツールバーのアイコンからポップアップを開いて、ひとつ書くだけ。</p>
         </div>
         <div style="background:#121215;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#21b35a;margin-bottom:16px;">02</div>
           <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="step2_t">Pick the models</h3>
-          <p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="step2_p">Check ChatGPT, Claude, Gemini — any combination you like.</p>
+          <p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="step2_p">ChatGPT・Claude・Gemini を、好きな組み合わせでチェック。</p>
         </div>
         <div style="background:#121215;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#ec3f93;margin-bottom:16px;">03</div>
           <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="step3_t">They answer, side by side</h3>
-          <p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="step3_p">Windows tile across your screen, auto-filled and submitted.</p>
+          <p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="step3_p">ウィンドウが画面にタイル配置され、自動入力・送信されます。</p>
         </div>
       </div>
     </div>
@@ -212,19 +213,19 @@
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;">
         <div style="background:#121215;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;display:flex;gap:18px;">
           <div style="flex:none;width:42px;height:42px;border-radius:11px;background:rgba(77,139,240,.14);display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#4d8bf0;box-shadow:0 0 0 4px rgba(77,139,240,.18);"></span></div>
-          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben1_t">Native features intact</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben1_p">Model selectors, GPTs, Gemini switching, web search, Canvas & Artifacts — all keep working.</p></div>
+          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben1_t">Native features intact</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben1_p">モデルセレクター、GPTs、Geminiの切替、Web検索、Canvas & Artifacts まで全部そのまま動きます。</p></div>
         </div>
         <div style="background:#121215;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;display:flex;gap:18px;">
           <div style="flex:none;width:42px;height:42px;border-radius:11px;background:rgba(33,179,90,.14);display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#21b35a;box-shadow:0 0 0 4px rgba(33,179,90,.18);"></span></div>
-          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben2_t">No API key, no extra cost</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben2_p">Reuses the logins you already pay for. Nothing new to set up, no usage billing.</p></div>
+          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben2_t">No API key, no extra cost</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben2_p">すでに使っているログインを再利用。新しい設定も、従量課金もありません。</p></div>
         </div>
         <div style="background:#121215;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;display:flex;gap:18px;">
           <div style="flex:none;width:42px;height:42px;border-radius:11px;background:rgba(236,63,147,.14);display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#ec3f93;box-shadow:0 0 0 4px rgba(236,63,147,.18);"></span></div>
-          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben3_t">Sets & follow-ups</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben3_p">Run several conversation sets in parallel and keep sending follow-ups to all of them at once.</p></div>
+          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben3_t">Sets & follow-ups</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben3_p">複数の会話セットを並行運用。開いているチャット全員へ、続けて追記送信できます。</p></div>
         </div>
         <div style="background:#121215;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:30px;display:flex;gap:18px;">
           <div style="flex:none;width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#c8c8cd;box-shadow:0 0 0 4px rgba(255,255,255,.1);"></span></div>
-          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben4_t">Private by design</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben4_p">No data collected, nothing sent anywhere. Everything happens in your browser.</p></div>
+          <div><h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin:0 0 9px;" data-i18n="ben4_t">Private by design</h3><p style="font-size:15px;line-height:1.55;color:#9a9aa3;margin:0;" data-i18n="ben4_p">データ収集なし、外部送信なし。すべてあなたのブラウザの中で完結します。</p></div>
         </div>
       </div>
     </div>
@@ -236,7 +237,7 @@
       <div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f77;margin-bottom:16px;" data-i18n="sets_kicker">Power feature</div>
         <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;line-height:1.12;letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance;" data-i18n="sets_h">Run many conversations at once.</h2>
-        <p style="font-size:16px;line-height:1.6;color:#a8a8b0;margin:0;text-wrap:pretty;" data-i18n="sets_p">Keep "3 windows for research" and "3 windows for coding" going in parallel. Route each prompt to the right set, tell them apart with colored labels, bring a whole set to the front, or close them all in one click.</p>
+        <p style="font-size:16px;line-height:1.6;color:#a8a8b0;margin:0;text-wrap:pretty;" data-i18n="sets_p">「リサーチ用の3窓」と「コーディング用の3窓」を並行運用。プロンプトを送り分け、色付きラベルで見分け、セット単位で前面化、ワンクリックで一括クローズできます。</p>
       </div>
       <div style="background:#17171b;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;box-shadow:0 18px 50px rgba(0,0,0,.4);">
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6f6f77;margin-bottom:10px;" data-i18n="sets_target">Target</div>
@@ -257,7 +258,7 @@
       <span style="display:flex;flex-direction:column;align-items:center;gap:5px;"><span style="width:13px;height:13px;border-radius:50%;background:#ec3f93;"></span><span style="width:13px;height:22px;border-radius:6px;background:#ec3f93;"></span></span>
     </span>
     <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:48px;letter-spacing:-.03em;margin:0 0 16px;text-wrap:balance;" data-i18n="fin_h">Stop pasting the same prompt three times.</h2>
-    <p style="font-size:18px;color:#a8a8b0;margin:0 0 34px;" data-i18n="fin_p">Add Chorus to Chrome and ask all three at once — free.</p>
+    <p style="font-size:18px;color:#a8a8b0;margin:0 0 34px;" data-i18n="fin_p">Chrome に Chorus を追加して、3つ同時に。無料で使えます。</p>
     <a class="ch-cta" href="https://chromewebstore.google.com/detail/chorus/jejadmfapoignjkhjodmnjfkjmcfljah" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-size:17px;font-weight:600;color:#0e0e10;background:#f2f2f3;padding:16px 30px;border-radius:13px;box-shadow:0 8px 24px rgba(0,0,0,.3);" data-i18n="cta_install2">Install free — Chrome Web Store</a>
   </section>
 
@@ -265,7 +266,7 @@
   <footer style="padding:36px 40px;border-top:1px solid rgba(255,255,255,.06);background:#09090b;">
     <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;color:#6f6f77;font-size:13px;">
       <div style="display:flex;align-items:center;gap:10px;"><span style="display:inline-flex;align-items:flex-end;gap:3px;height:18px;"><span style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="width:6px;height:6px;border-radius:50%;background:#4d8bf0;"></span><span style="width:6px;height:10px;border-radius:3px;background:#4d8bf0;"></span></span><span style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="width:6px;height:6px;border-radius:50%;background:#21b35a;"></span><span style="width:6px;height:13px;border-radius:3px;background:#21b35a;"></span></span><span style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="width:6px;height:6px;border-radius:50%;background:#ec3f93;"></span><span style="width:6px;height:10px;border-radius:3px;background:#ec3f93;"></span></span></span><span style="font-family:'Space Grotesk',sans-serif;font-weight:600;color:#c8c8cd;">Chorus</span></div>
-      <span data-i18n="footer_meta">MIT · v0.1.0 · No data collected — everything stays in your browser</span>
+      <span data-i18n="footer_meta">MIT · v0.1.0 · データ収集なし — すべてブラウザ内で完結</span>
     </div>
   </footer>
 
@@ -356,8 +357,8 @@
 
   window.setLang = applyLang;
 
-  // English page defaults to English copy. Language links navigate between pages.
-  var initial = "en";
+  // Japanese page defaults to Japanese copy. Language links navigate between pages.
+  var initial = "ja";
   applyLang(initial);
 })();
 </script>
